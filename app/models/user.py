@@ -1,21 +1,45 @@
+import uuid
+
+from sqlalchemy import Boolean
 from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
 from sqlalchemy import DateTime
+from sqlalchemy import String
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 
 from app.db.base import Base
 
 
 class User(Base):
-
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(
+        UUID(as_uuid=True),
+        primary_key=True,
+        default=uuid.uuid4
+    )
 
-    email = Column(String, unique=True, nullable=False)
+    email = Column(
+        String,
+        unique=True,
+        nullable=False,
+        index=True
+    )
 
-    password = Column(String, nullable=False)
+    hashed_password = Column(
+        String,
+        nullable=False
+    )
+
+    is_active = Column(
+        Boolean,
+        default=True
+    )
+
+    is_admin = Column(
+        Boolean,
+        default=False
+    )
 
     created_at = Column(
         DateTime(timezone=True),
