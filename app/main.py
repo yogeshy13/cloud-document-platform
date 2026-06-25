@@ -9,9 +9,6 @@ from app.db.database import engine
 
 import app.db.models
 
-Base.metadata.create_all(bind=engine)
-
-
 app = FastAPI(
     title="Cloud Document Platform",
     version="1.0.0"
