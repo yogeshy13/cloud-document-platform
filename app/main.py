@@ -1,4 +1,16 @@
 from fastapi import FastAPI
+from app.core.config import settings
+
+settings.DATABASE_URL
+
+from app.db.database import Base
+
+from app.db.database import engine
+
+import app.db.models
+
+Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="Cloud Document Platform",
