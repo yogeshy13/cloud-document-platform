@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+
+  api:
+    build: .
+    container_name: document-api
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+
+    volumes:
+      - .:/app
+      - uploads:/app/uploads
+
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: postgres-db
+
+    restart: always
+
+    environment:
+
+      POSTGRES_USER: postgres
+
+      POSTGRES_PASSWORD: postgres
+
+      POSTGRES_DB: document_platform
+
+    ports:
+
+      - "5432:5432"
+
+    volumes:
+
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+
+  postgres_data:
+
+  uploads:
