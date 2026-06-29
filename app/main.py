@@ -1,26 +1,18 @@
 from fastapi import FastAPI
-from app.core.config import settings
-
-settings.DATABASE_URL
-
-from app.db.database import Base
-
-from app.db.database import engine
-
-import app.db.models
+from app.api.v1.auth import router as auth_router
 
 app = FastAPI(
     title="Cloud Document Platform",
-    version="1.0.0"
 )
+
+app.include_router(auth_router)
 
 
 @app.get("/")
 def root():
     return {
-        "message": "Cloud Document Platform API"
+        "message": "Cloud Document Platform"
     }
-
 
 @app.get("/health")
 def health():

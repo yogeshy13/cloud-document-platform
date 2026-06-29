@@ -1,4 +1,4 @@
-#!/Users/yy/cloud-document-platform/backend/.venv/bin/python3
+#!/Users/yy/cloud-document-platform/backend/.venv/bin/python3.12
 
 import sys
 import json

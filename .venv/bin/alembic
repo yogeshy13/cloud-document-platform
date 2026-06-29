@@ -1,31 +1,6 @@
-#!/Users/yy/cloud-document-platform/backend/.venv/bin/python3
-# -*- coding: utf-8 -*-
-import os
-import re
+#!/Users/yy/cloud-document-platform/backend/.venv/bin/python3.12
 import sys
-
-venv_base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-site_packages_paths = [
-    os.path.join(
-        venv_base,
-        'lib',
-        f'python{sys.version_info.major}.{sys.version_info.minor}',
-        'site-packages',
-    ),
-    os.path.join(
-        venv_base,
-        'lib64',
-        f'python{sys.version_info.major}.{sys.version_info.minor}',
-        'site-packages',
-    ),
-]
-for site_packages in site_packages_paths:
-    if os.path.isdir(site_packages):
-        sys.path.insert(0, site_packages)
-        break
-
 from alembic.config import main
-
 if __name__ == '__main__':
-    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
     sys.exit(main())
